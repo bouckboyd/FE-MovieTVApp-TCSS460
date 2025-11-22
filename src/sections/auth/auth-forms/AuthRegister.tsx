@@ -63,6 +63,8 @@ export default function AuthRegister({ providers, csrfToken }: any) {
       initialValues={{
         firstname: '',
         lastname: '',
+        username: '',
+        phone: '',
         email: '',
         password: '',
         submit: null
@@ -70,6 +72,17 @@ export default function AuthRegister({ providers, csrfToken }: any) {
       validationSchema={Yup.object().shape({
         firstname: Yup.string().max(255).required('First Name is required'),
         lastname: Yup.string().max(255).required('Last Name is required'),
+        username: Yup.string()
+          .max(255)
+          .required('Username is required')
+          .matches(/^[a-zA-Z0-9_-]+$/, 'Username can only contain letters, numbers, underscores, and hyphens'),
+        phone: Yup.string()
+          .required('Phone is required')
+          .test('min-digits', 'Phone number must contain at least 10 digits', (value) => {
+            if (!value) return false;
+            const digits = value.replace(/\D/g, '');
+            return digits.length >= 10;
+          }),
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
         password: Yup.string()
           .required('Password is required')
@@ -82,6 +95,8 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           redirect: false,
           firstname: values.firstname,
           lastname: values.lastname,
+          username: values.username,
+          phone: values.phone,
           email: trimmedEmail,
           password: values.password,
           callbackUrl: APP_DEFAULT_PATH
@@ -137,6 +152,50 @@ export default function AuthRegister({ providers, csrfToken }: any) {
               {touched.lastname && errors.lastname && (
                 <FormHelperText error id="helper-text-lastname-signup">
                   {errors.lastname}
+                </FormHelperText>
+              )}
+            </Grid>
+            <Grid item xs={6}>
+              <Stack spacing={1}>
+                <InputLabel htmlFor="username-signup">Username*</InputLabel>
+                <OutlinedInput
+                  fullWidth
+                  error={Boolean(touched.username && errors.username)}
+                  id="username-signup"
+                  type="text"
+                  value={values.username}
+                  name="username"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Choose a username"
+                  inputProps={{}}
+                />
+              </Stack>
+              {touched.username && errors.username && (
+                <FormHelperText error id="helper-text-username-signup">
+                  {errors.username}
+                </FormHelperText>
+              )}
+            </Grid>
+            <Grid item xs={6}>
+              <Stack spacing={1}>
+                <InputLabel htmlFor="phone-signup">Phone*</InputLabel>
+                <OutlinedInput
+                  fullWidth
+                  error={Boolean(touched.phone && errors.phone)}
+                  id="phone-signup"
+                  type="tel"
+                  value={values.phone}
+                  name="phone"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Enter phone number"
+                  inputProps={{}}
+                />
+              </Stack>
+              {touched.phone && errors.phone && (
+                <FormHelperText error id="helper-text-phone-signup">
+                  {errors.phone}
                 </FormHelperText>
               )}
             </Grid>
