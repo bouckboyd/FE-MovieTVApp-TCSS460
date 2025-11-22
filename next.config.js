@@ -22,7 +22,11 @@ const nextConfig = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET_KEY,
     NEXTAUTH_SECRET_KEY: process.env.NEXTAUTH_SECRET_KEY,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    MESSAGES_WEB_API_URL: process.env.MESSAGES_WEB_API_URL,
+    // New separate endpoints for movie and TV backends
+    MOVIE_WEB_API_URL: process.env.MOVIE_WEB_API_URL,
+    TV_WEB_API_URL: process.env.TV_WEB_API_URL,
+    // Backwards compatibility: map old variable name to movie URL if present
+    MESSAGES_WEB_API_URL: process.env.MESSAGES_WEB_API_URL || process.env.MOVIE_WEB_API_URL,
     MESSAGES_WEB_API_KEY: process.env.MESSAGES_WEB_API_KEY,
     CREDENTIALS_API_URL: process.env.CREDENTIALS_API_URL,
     NEXT_APP_JWT_SECRET: process.env.REACT_APP_JWT_SECRET,
