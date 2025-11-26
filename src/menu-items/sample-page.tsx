@@ -4,13 +4,13 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import ChromeOutlined from '@ant-design/icons/ChromeOutlined';
+import HomeOutlined from '@mui/icons-material/HomeOutlined';
 
 // type
 import { NavItemType } from 'types/menu';
 
 // icons
-const icons = { ChromeOutlined };
+const icons = { HomeOutlined };
 
 // ==============================|| MENU ITEMS - HOME PAGE ||============================== //
 
@@ -19,7 +19,7 @@ const homePage: NavItemType = {
   title: <FormattedMessage id="home" defaultMessage="Home" />,
   type: 'group',
   url: '/home-page',
-  icon: icons.ChromeOutlined
+  icon: icons.HomeOutlined
 };
 
 export default homePage;

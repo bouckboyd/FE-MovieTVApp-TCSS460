@@ -26,14 +26,6 @@ const other: NavItemType = {
   type: 'group',
   children: [
     {
-      id: 'disabled-menu',
-      title: <FormattedMessage id="disabled-menu" />,
-      type: 'item',
-      url: '#',
-      icon: icons.StopOutlined,
-      disabled: true
-    },
-    {
       id: 'full-page',
       title: <FormattedMessage id="full-page" />,
       type: 'item',
